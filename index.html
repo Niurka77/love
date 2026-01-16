@@ -356,23 +356,26 @@
             margin: 0 15px;
         }
 
-        .pinterest-grid {
-            columns: 4 250px;
-            column-gap: 20px;
-            margin: 0 auto;
-        }
+      .pinterest-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto 40px;
+  padding: 0 10px;
+}
 
-        .pin {
-            break-inside: avoid;
-            margin-bottom: 20px;
-            border-radius: 18px;
-            overflow: hidden;
-            background: white;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            display: inline-block;
-            width: 100%;
-        }
+       .pin {
+  background: white;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
 
         .pin:hover {
             transform: translateY(-8px);
@@ -636,63 +639,60 @@
 </div>
 
 <div class="pinterest-grid">
- 
-                
-                <!-- Pin 2: Bulbasaur -->
-                <div class="pin">
-                    <img src="pokemon-bulbasaur.gif" alt="Bulbasaur" class="pin-img" onerror="this.src='https://media.giphy.com/media/13Z5kstwMjnP3aUXyN/giphy.gif'">
-                    <div class="pin-content">
-                        <h3>✨ Compañero de Batalla</h3>
-                        <p>¡Te elijo a ti! Eres mi Pokémon inicial favorito, mi compañero en todas las aventuras.</p>
-                    </div>
-                </div>
-                
-                <!-- Pin 3: Pikachu -->
-                <div class="pin">
-                    <img src="pikachu_molesto.png" alt="Pikachu Molesto" class="pin-img" onerror="this.src='https://images.unsplash.com/photo-1542779283-429940ce8336?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60'">
-                    <div class="pin-content">
-                        <h3>😠 Pikachu Molesto</h3>
-                        <p>Incluso cuando te pones así, con esa cara de Pikachu enfadado, me robas el corazón.</p>
-                    </div>
-                </div>
-                
-               
-                <!-- Pin 5: Ash -->
-                <div class="pin">
-                    <img src="Ash_ketshup.png" alt="Ash Ketchum" class="pin-img" onerror="this.src='https://images.unsplash.com/photo-1542779283-429940ce8336?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60'">
-                    <div class="pin-content">
-                        <h3>🌟 Nuestro Héroe</h3>
-                        <p>Como Ash, siempre encuentras la manera de sorprenderme y ser mi héroe en cada batalla.</p>
-                    </div>
-                </div>
-                
-                <!-- Pin 6: Gif 3 -->
-                <div class="pin">
-                    <img src="image3.gif" alt="Gif Especial" class="pin-img" onerror="this.src='https://media.giphy.com/media/3orieRfy7tYV5GTBi8/giphy.gif'">
-                    <div class="pin-content">
-                        <h3>💫 Magia entre Nosotros</h3>
-                        <p>Así de mágico se siente cada momento a tu lado, como un hechizo de hada que nunca se acaba.</p>
-                    </div>
-                </div>
-                
-                <!-- Pin 7: Gif 7 -->
-                <div class="pin">
-                    <img src="image7.gif" alt="Gif Romántico" class="pin-img" onerror="this.src='https://media.giphy.com/media/3o7abKhOpu0NwenH3O/giphy.gif'">
-                    <div class="pin-content">
-                        <h3>❤️ Latidos Sincronizados</h3>
-                        <p>Nuestros corazones laten al mismo ritmo, como este gif que nunca para de moverse.</p>
-                    </div>
-                </div>
-                
-                <!-- Pin 8: Mensaje Especial -->
-                <div class="pin">
-                    <div class="pin-content" style="background: linear-gradient(135deg, #ffc0cb, #ffb6c1); min-height: 200px; display: flex; flex-direction: column; justify-content: center;">
-                        <h3 style="color: #d02090;">💌 Un Mensaje para Ti</h3>
-                        <p style="color: #d02090; font-size: 1.1rem; margin-top: 10px;">Eres mi Masterball atrapasueños, mi Pokémon legendario, mi entrenador favorito en este juego llamado vida.</p>
-                        <div style="margin-top: 15px; font-size: 2rem;">🎀 🎮 💖</div>
-                    </div>
-                </div>
-            </div>
+  <!-- Pin 2: Bulbasaur -->
+  <div class="pin">
+    <img src="pokemon-bulbasaur.gif" alt="Bulbasaur" class="pin-img" onerror="this.src='https://media.giphy.com/media/13Z5kstwMjnP3aUXyN/giphy.gif'">
+    <div class="pin-content">
+      <h3>✨ Compañero de Batalla</h3>
+      <p>¡Te elijo a ti! Eres mi Pokémon inicial favorito, mi compañero en todas las aventuras.</p>
+    </div>
+  </div>
+  
+  <!-- Pin 3: Pikachu -->
+  <div class="pin">
+    <img src="pikachu_molesto.png" alt="Pikachu Molesto" class="pin-img" onerror="this.src='https://images.unsplash.com/photo-1542779283-429940ce8336?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60'">
+    <div class="pin-content">
+      <h3>😠 Pikachu Molesto</h3>
+      <p>Incluso cuando te pones así, con esa cara de Pikachu enfadado, me robas el corazón.</p>
+    </div>
+  </div>
+  
+  <!-- Pin 5: Ash -->
+  <div class="pin">
+    <img src="Ash_ketshup.png" alt="Ash Ketchum" class="pin-img" onerror="this.src='https://images.unsplash.com/photo-1542779283-429940ce8336?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60'">
+    <div class="pin-content">
+      <h3>🌟 Nuestro Héroe</h3>
+      <p>Como Ash, siempre encuentras la manera de sorprenderme y ser mi héroe en cada batalla.</p>
+    </div>
+  </div>
+  
+  <!-- Pin 6: Gif 3 -->
+  <div class="pin">
+    <img src="image3.gif" alt="Gif Especial" class="pin-img" onerror="this.src='https://media.giphy.com/media/3orieRfy7tYV5GTBi8/giphy.gif'">
+    <div class="pin-content">
+      <h3>💫 Magia entre Nosotros</h3>
+      <p>Así de mágico se siente cada momento a tu lado, como un hechizo de hada que nunca se acaba.</p>
+    </div>
+  </div>
+  
+  <!-- Pin 7: Gif 7 -->
+  <div class="pin">
+    <img src="image7.gif" alt="Gif Romántico" class="pin-img" onerror="this.src='https://media.giphy.com/media/3o7abKhOpu0NwenH3O/giphy.gif'">
+    <div class="pin-content">
+      <h3>❤️ Latidos Sincronizados</h3>
+      <p>Nuestros corazones laten al mismo ritmo, como este gif que nunca para de moverse.</p>
+    </div>
+  </div>
+  
+  <!-- Pin 8: Mensaje Especial -->
+  <div class="pin">
+    <div class="pin-content special-pin">
+      <h3>💌 Un Mensaje para Ti</h3>
+      <p>Eres mi Masterball atrapasueños, mi Pokémon legendario, mi entrenador favorito en este juego llamado vida.</p>
+      <div class="emoji-line">🎀 🎮 💖</div>
+    </div>
+  </div>
+</div>
             
             <div class="music-section">
                 <h3 class="music-title">❤️ Esta canción me hizo pensar en ti hoy...</h3>
