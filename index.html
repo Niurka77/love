@@ -709,76 +709,179 @@
         </div>
     </div>
 
-    <script>
-        // Lógica de la Contraseña
-        function checkPassword() {
-            const pass = document.getElementById('passInput').value.toLowerCase();
-            const error = document.getElementById('error-msg');
-            const overlay = document.getElementById('safe-overlay');
-            const main = document.getElementById('main-content');
-            const parchment = document.getElementById('mainParchment');
-            const contentText = document.getElementById('mainContentText');
+<script>
+    // Lógica de la Contraseña
+    function checkPassword() {
+        const pass = document.getElementById('passInput').value.toLowerCase();
+        const error = document.getElementById('error-msg');
+        const overlay = document.getElementById('safe-overlay');
+        const main = document.getElementById('main-content');
+        const parchment = document.getElementById('mainParchment');
+        const contentText = document.getElementById('mainContentText');
 
-            if (pass === "lilac") {
-                // Desvanecer caja fuerte y mostrar carta
-                overlay.style.transform = "translateY(-100%)";
-                setTimeout(() => {
-                    overlay.style.display = "none";
-                    main.style.display = "flex";
-                    // Iniciar animaciones originales
-                    parchment.classList.add('active-unroll');
-                    contentText.classList.add('active-content');
-                }, 800);
-            } else {
-                error.style.display = "block";
-                document.getElementById('passInput').value = "";
-            }
-        }
-
-        // Detectar Enter en el input
-        document.getElementById('passInput').addEventListener('keypress', function (e) {
-            if (e.key === 'Enter') checkPassword();
-        });
-
-        // Navegación entre carta y galería
-        document.getElementById('showGalleryBtn').addEventListener('click', function() {
-            document.getElementById('main-content').style.display = 'none';
-            document.getElementById('gallery-content').style.display = 'flex';
-            window.scrollTo(0, 0);
-        });
-
-        document.getElementById('backToLetter').addEventListener('click', function(e) {
-            e.preventDefault();
-            document.getElementById('gallery-content').style.display = 'none';
-            document.getElementById('main-content').style.display = 'flex';
-            window.scrollTo(0, 0);
-        });
-
-        // Animación de replay
-        document.addEventListener('DOMContentLoaded', function() {
-       
-            const parchment = document.getElementById('mainParchment');
-            const contentText = document.getElementById('mainContentText');
-
-            replayBtn.addEventListener('click', function() {
-                parchment.classList.remove('active-unroll');
-                contentText.classList.remove('active-content');
-                void parchment.offsetWidth; // Reflow
+        if (pass === "lilac") {
+            overlay.style.transform = "translateY(-100%)";
+            setTimeout(() => {
+                overlay.style.display = "none";
+                main.style.display = "flex";
                 parchment.classList.add('active-unroll');
                 contentText.classList.add('active-content');
+            }, 800);
+        } else {
+            error.style.display = "block";
+            document.getElementById('passInput').value = "";
+        }
+    }
+
+    document.getElementById('passInput').addEventListener('keypress', function (e) {
+        if (e.key === 'Enter') checkPassword();
+    });
+
+    document.getElementById('showGalleryBtn').addEventListener('click', function() {
+        document.getElementById('main-content').style.display = 'none';
+        document.getElementById('gallery-content').style.display = 'flex';
+        window.scrollTo(0, 0);
+    });
+
+    document.getElementById('backToLetter').addEventListener('click', function(e) {
+        e.preventDefault();
+        document.getElementById('gallery-content').style.display = 'none';
+        document.getElementById('main-content').style.display = 'flex';
+        window.scrollTo(0, 0);
+    });
+
+    // Función para crear el overlay de Pikachu
+    function showPikachuImage() {
+        const pikachuOverlay = document.createElement('div');
+        pikachuOverlay.style.position = 'fixed';
+        pikachuOverlay.style.top = '0';
+        pikachuOverlay.style.left = '0';
+        pikachuOverlay.style.width = '100vw';
+        pikachuOverlay.style.height = '100vh';
+        pikachuOverlay.style.backgroundColor = 'rgba(0, 0, 0, 0.85)';
+        pikachuOverlay.style.display = 'flex';
+        pikachuOverlay.style.justifyContent = 'center';
+        pikachuOverlay.style.alignItems = 'center';
+        pikachuOverlay.style.zIndex = '10001';
+        pikachuOverlay.style.opacity = '0';
+        pikachuOverlay.style.transition = 'opacity 0.4s ease';
+
+        const img = document.createElement('img');
+        img.src = 'pikachu.png';
+        img.alt = 'Pikachu sorpresa!';
+        img.style.maxWidth = '80%';
+        img.style.maxHeight = '80%';
+        img.style.borderRadius = '15px';
+        img.style.boxShadow = '0 0 30px rgba(255, 215, 0, 0.7)';
+        img.style.cursor = 'pointer';
+
+        pikachuOverlay.appendChild(img);
+        document.body.appendChild(pikachuOverlay);
+
+        // Mostrar con fade-in
+        setTimeout(() => {
+            pikachuOverlay.style.opacity = '1';
+        }, 10);
+
+        // Cerrar al hacer clic en la imagen o en el fondo
+        pikachuOverlay.addEventListener('click', function() {
+            pikachuOverlay.style.opacity = '0';
+            setTimeout(() => {
+                if (document.body.contains(pikachuOverlay)) {
+                    document.body.removeChild(pikachuOverlay);
+                }
+            }, 400);
+        });
+
+        // Auto-cerrar después de 5 segundos
+        setTimeout(() => {
+            if (document.body.contains(pikachuOverlay)) {
+                pikachuOverlay.style.opacity = '0';
+                setTimeout(() => {
+                    if (document.body.contains(pikachuOverlay)) {
+                        document.body.removeChild(pikachuOverlay);
+                    }
+                }, 400);
+            }
+        }, 5000);
+    }
+
+    // --- NUEVA FUNCIONALIDAD: Clic en "Pikachu" → muestra imagen ---
+    // --- Y la anterior: 3 clics en Pokébola → mensaje secreto ---
+    document.addEventListener('DOMContentLoaded', function() {
+        const pokeball = document.querySelector('.pokeball');
+        let clickCount = 0;
+
+        // 1. Manejar clics en la Pokébola
+        if (pokeball) {
+            pokeball.addEventListener('click', function() {
+                clickCount++;
+                if (clickCount >= 3) {
+                    clickCount = 0;
+
+                    const secretOverlay = document.createElement('div');
+                    secretOverlay.style.position = 'fixed';
+                    secretOverlay.style.top = '0';
+                    secretOverlay.style.left = '0';
+                    secretOverlay.style.width = '100vw';
+                    secretOverlay.style.height = '100vh';
+                    secretOverlay.style.backgroundColor = 'rgba(0, 0, 0, 0.95)';
+                    secretOverlay.style.color = '#ffcc80';
+                    secretOverlay.style.display = 'flex';
+                    secretOverlay.style.justifyContent = 'center';
+                    secretOverlay.style.alignItems = 'center';
+                    secretOverlay.style.zIndex = '10000';
+                    secretOverlay.style.fontSize = '2.5rem';
+                    secretOverlay.style.fontFamily = "'Georgia', serif";
+                    secretOverlay.style.textAlign = 'center';
+                    secretOverlay.style.padding = '20px';
+                    secretOverlay.style.boxSizing = 'border-box';
+                    secretOverlay.innerText = 'comprame mi hamburguesa no seas malito :3';
+
+                    document.body.appendChild(secretOverlay);
+
+                    setTimeout(() => {
+                        if (document.body.contains(secretOverlay)) {
+                            document.body.removeChild(secretOverlay);
+                        }
+                    }, 4000);
+                }
+            });
+        }
+
+        // 2. Hacer clickeables todas las palabras "Pikachu" en el contenido
+        const content = document.getElementById('mainContentText');
+        if (content) {
+            // Guardamos el HTML original
+            let html = content.innerHTML;
+
+            // Usamos expresión regular para reemplazar "Pikachu" (respetando mayúsculas)
+            // Solo si no está ya dentro de un enlace o elemento interactivo
+            const regex = /Pikachu/gi;
+            html = html.replace(regex, match => {
+                return `<span class="pikachu-clickable" style="cursor:pointer;color:#1565c0;text-decoration:underline;">${match}</span>`;
             });
 
-            // Efecto de la pokebola
-            setInterval(() => {
-                const pokeball = document.querySelector('.pokeball');
-                if(pokeball) {
-                    pokeball.style.transform = 'scale(1.1)';
-                    setTimeout(() => pokeball.style.transform = 'scale(1)', 300);
-                }
-            }, 5000);
-            
-           
-        });
-    </script>
+            content.innerHTML = html;
+
+            // Añadir evento a los nuevos spans
+            const pikachuSpans = content.querySelectorAll('.pikachu-clickable');
+            pikachuSpans.forEach(span => {
+                span.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    showPikachuImage();
+                });
+            });
+        }
+
+        // Efecto de parpadeo en la pokebola (sin cambios)
+        setInterval(() => {
+            if (pokeball) {
+                pokeball.style.transform = 'scale(1.1)';
+                setTimeout(() => pokeball.style.transform = 'scale(1)', 300);
+            }
+        }, 5000);
+    });
+</script>
 </body>
 </html>
